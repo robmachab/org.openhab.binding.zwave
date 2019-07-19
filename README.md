@@ -56,7 +56,7 @@ Sets the controller as a Static Update Controller within the network
 
 #### Heal Time [heal_time]
 
-Sets the nightly heal time (in hours). This is best set to disabled unless your network has routing issues. Be aware that a full network heal may cause more issues than you already have so it may be better to tackle the nodes that have issues. The setting can be found under the controller node in things in HABmin. To heal an individaul node there is a command under tools advanced settings in HABmin. It should not be necessary to use heal in a stable network and particularly in a Z-Wave+ network. see Mesh Heal later on this page for more details.
+Sets the nightly heal time (in hours). This is best set to disabled unless your network has routing issues. Be aware that a full network heal may cause more issues than the network already has so it may be better to tackle the nodes that have issues. To heal an individaul node there is a command under tools advanced settings in HABmin. It should not be necessary to use heal in a stable network and particularly in a Z-Wave+ network. see Mesh Heal later on this page for more details.
 
 
 #### Inclusion Mode [inclusion_mode]
@@ -283,7 +283,7 @@ A special type of battery device is a *FLiRS* device. These devices do not sleep
 
 ### Polling
 
-The binding supports periodic polling. This has two purposes - firstly to ensure that a device is still responding, and secondly to update the bindings representation of the state of the device.  Where possible *associations* should be used to update the device state and polling set to days or weeks - this will keep network traffic to a minimum, which will improve the network latency, and it will be faster since *associations* send updates to the controller immediately where polling will always be noticeably slower.
+The binding supports periodic polling. This has two purposes - firstly to ensure that a device is still responding, and secondly to update the bindings representation of the state of the device.  Where possible *associations* should be used to update the device state and polling set to 4 hours as a guidline level - this will keep network traffic to a minimum, which will improve the network latency, and it will be faster since *associations* send updates to the controller immediately where polling will always be noticeably slower.
 
 If a device fails to respond to a poll, then it will be marked as DEAD and shown as offline. For battery devices, if they do no provide a wakeup within a period of twice the wakeup period, then they will also be considered dead and taken offline.
 
@@ -357,7 +357,7 @@ In reverse, when nodes are transmitting information back to the controller or to
 
 In general only configure devices to send reports needed at the lowest frequency they are useful and disable any reports of values not needed. Most modern device allow configuration of the time interval or amount of change in a value to trigger a report. Some even allow the specification of the minimum time between consecutive reports. It is better to be conservative with these values as a network is built to avoid a lot of tuning and configuration later.
 
-When a node fails in some way, the bandwidth becomes strangled even further due to the long time a stick tries to talk to the failed node. The stick will try several times to talk to the failed node each with a timeout before returning a failure to the Z-wave binding. While this is happening no other message can be transmitted. If the device is in a long term failed sate this long pause will be repeated as the OpenHAB binding also issues a retries. If there is a lot of regular traffic when this happens very undesirable results are often observed with many devices appearing to have issues despite the issue possibly being caused by a single device.
+When a node fails in some way, the bandwidth becomes strangled even further due to the long time a stick tries to talk to the failed node. The stick will try several times to talk to the failed node each with a timeout before returning a failure to the Z-wave binding. While this is happening no other message can be transmitted. If the device is in a long term failed state this long pause will be repeated as the OpenHAB binding also issues retries. If there is a lot of regular traffic when this happens very undesirable results are often observed with many devices appearing to have issues despite the issue possibly being caused by a single device.
 
 It is therefore best to make sure bandwidth is not wasted as it increases the resilience of your home automation.
 
